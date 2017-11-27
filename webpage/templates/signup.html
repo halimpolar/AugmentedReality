@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Registration</title>
+  <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../static/css/signup.css" rel="stylesheet">
+
+  <script src="../static/js/jquery-3.2.1.min.js"></script>
+  <script src="../static/js/jquery.ui.widget.js"></script>
+  <script type="text/javascript" src="../static/js/jquery.fileupload.js"></script>
+  <script type="text/javascript" src="../static/js/jquery.fileupload-process.js"></script>
+  <script type="text/javascript" src="../static/js/jquery.fileupload-ui.js"></script>
+  <script src="../static/js/signUp.js"></script>
+  <script type="text/javascript" src="../static/js/aruco-marker.js"></script>
+
+</head>
+
+<body>
+  <div class="jumbotron">
+    <h1 align="center">Get Your Marker By Filling This Form</h1>
+    <form class="form-signin">
+      <label for="inputName" class="sr-only">Name</label>
+      <input type="name" name="inputName" id="inputName" class="form-control" placeholder="Name" required autofocus>
+      <br>
+      <label for="inputSID" class="sr-only">Email address</label>
+      <input type="text" name="inputSID" id="inputSID" class="form-control" placeholder="Student ID number" required autofocus>
+      <br>
+      <label for="inputRole" class="sr-only">Role</label>
+      <input list="role" name="inputRole" id="inputRole" class="form-control" placeholder="I am a..." required>
+      <datalist id="role">
+        <option value="Student">
+          <option value="Teacher">
+            <option value="Teacher's Assistant">
+              <option value="Researcher">
+                <option value="IT person">
+                    <option value="Librarian">
+      </datalist>
+      <br>
+      <label for="inputAruco" class="sr-only">Marker ID</label>
+      <input type="text" name="inputAruco" id="inputAruco" class="form-control" readonly>
+      <strong>NOTE: Please keep this Marker for your reference</strong>
+      </input>
+      
+      <div id="marker">
+        </div>
+        
+        <script>
+          function randomMarker() {
+            var id = Math.floor(Math.random() * 1024);
+            document.getElementById("inputAruco").value = id;
+    
+            var el = document.getElementById('marker');
+            el.innerHTML = '</p>' + (new ArucoMarker(id).toSVG('300px'));
+          }
+    
+          randomMarker();
+
+          </script>
+
+      <div class="form-group">
+      <label for="txtPost">Photos</label>
+
+      <div class="input-group">
+          <span class="input-group-btn">
+          <span class="btn btn-primary btn-file">
+              Browse&hellip; <input type="file" id="fileupload" name="file" multiple>
+          </span>
+          </span>
+      </div>
+      </div>
+      <br>
+      <button id="btnSignUp" class="btn btn-lg btn-primary btn-block" type="button">Sign up</button>
+    </form>
+
+  </div>
+
+
+
+  <footer class="footer">
+    <p>&copy; CMPE 280 - San Jose State University</p>
+  </footer>
+
+  </div>
+</body>
+
+</html>

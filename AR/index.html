@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <!-- include three.js -->
-<script src='vendor/three.js/build/three.js'></script>
+<script src='../three.js'></script>
 
 <!-- include js-aruco -->
-<script src='../vendor/js-aruco/svd.js'></script>
-<script src='../vendor/js-aruco/posit1-patched.js'></script>
-<script src='../vendor/js-aruco/cv.js'></script>
-<script src='../vendor/js-aruco/aruco.js'></script>
+<script src='../js-aruco/svd.js'></script>
+<script src='../js-aruco/posit1-patched.js'></script>
+<script src='../js-aruco/cv.js'></script>
+<script src='../js-aruco/aruco.js'></script>
 
 <!-- include some extensions -->
 <script src='../threex.webcamgrabbing.js'></script>
@@ -15,15 +15,10 @@
 <script src='../threex.jsarucomarker.js'></script>
 
 <!-- script specific to contact sharing in ar -->
-<script src='contact-sharing-in-ar/js/ui.badgesprite.js'></script>
-
-<script src='contact-sharing-in-ar/js/badgeInfos.js'></script>
+<script src='components/js/ui.badgesprite.js'></script>
+<script src='components/js/badgeInfos.js'></script>
 
 <body style='margin: 0px; overflow: hidden; text-align:center;'><script>
-	//////////////////////////////////////////////////////////////////////////////////
-	//		Init
-	//////////////////////////////////////////////////////////////////////////////////
-
 	// init renderer
 	var renderer	= new THREE.WebGLRenderer({
 		antialias	: true,
@@ -39,33 +34,6 @@
 	var scene = new THREE.Scene()
 	var camera	= new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.01, 1000);
 	camera.position.z = 2;
-
-	//////////////////////////////////////////////////////////////////////////////////
-	//		get Data
-	//////////////////////////////////////////////////////////////////////////////////
-	// var badgeInfos = [
-	// 	{
-	// 		firstName	: 'Mike',
-	// 		lastName	: 'Newton',
-	// 		role            : 'industry',
-	// 		markerId	: 0,
-	// 		avatar	        : '/examples/contact-sharing-in-ar/avatars/avatar-0.jpg',
-	// 	},
-	// 	{
-	// 		firstName	: 'Adam',
-	// 		lastName	: 'Huxley',
-	// 		role            : 'corporate',
-	// 		markerId	: 1,
-	// 		avatar	        : '/examples/contact-sharing-in-ar/avatars/avatar-1.jpg',
-	// 	},
-	// 	{
-	// 		firstName	: 'Albert',
-	// 		lastName	: 'Walton',
-	// 		role            : 'designer',
-	// 		markerId	: 265,
-	// 		avatar	        : '/examples/contact-sharing-in-ar/avatars/avatar-265.jpg',
-	// 	},
-	// ]
 
 	//////////////////////////////////////////////////////////////////////////////////
 	//		add an object in the scene
@@ -160,11 +128,7 @@
 			    	badgeSprite.draw(badgeInfo);
 				previousMarkerId = marker.id;
 			}
-
-			/**
-			 * @TODO support multiple markers
-			 */
-
+			
 			jsArucoMarker.markerToObject3D(marker, object3d)
 
 			object3d.visible = true;
