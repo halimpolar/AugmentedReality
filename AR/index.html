@@ -17,7 +17,7 @@
 <!-- script specific to contact sharing in ar -->
 <script src='components/js/ui.badgesprite.js'></script>
 <script src='components/js/badgeInfos.js'></script>
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <body style='margin: 0px; overflow: hidden; text-align:center;'><script>
 	// init renderer
 	var renderer	= new THREE.WebGLRenderer({
@@ -102,9 +102,37 @@
 	// @TODO support click on the sprite
 
 	var previousMarkerId = null;
-
+	var final;
+	var dbData = [];
+	$.ajax({
+		type: 'POST',
+		url: './components/db.php',
+		success: function(data)
+        {
+        //    console.log(data);
+        }
+	}).done(function(results) {
+	// you may safely use results here	
+		
+		final = JSON.parse(results);
+		
+		for(var i = 0 ; i < final.length ; i++){
+			
+			var data = {
+				firstName: final[i].user_name,
+				lastName: final[i].user_SID,
+				role: final[i].user_role,
+				markerId: parseInt(final[i].user_marker),
+				avatar: 'components/icon/student.png',
+			};
+			dbData.push(data);
+		}
+		
+	});
+		
 	// process the image source with the marker recognition
 	onRenderFcts.push(function(){
+		
 		var domElement	= videoGrabbing.domElement
 		var markers	= jsArucoMarker.detectMarkers(domElement)
 		var object3d	= scene
@@ -114,11 +142,20 @@
 		// see if this.markerId has been found
 		markers.forEach(function(marker){
 			var badgeInfo = null
-			badgeInfos.forEach(function(item){
-				if( item.markerId !== marker.id )	return
-				badgeInfo = item
+			
+			dbData.forEach(function(item){
+				// console.log(item);
+				
+				// console.log("Item markerID: " + item.user_marker);
+				// console.log("Marker.id: " + marker.id);
+				if( item.markerId !== marker.id ){
+					console.log("TRUE");
+					return;
+				}
+				badgeInfo = item;
+				
 			})
-
+			// console.log(dbData);
 			if( badgeInfo === null ){
 				console.log('found marker', marker.id, 'but no matching badge found')
 				return

@@ -1,0 +1,15 @@
+Steps to deploy project:
+
+1. Unzip Folder
+2. Set up DB connection by going to /webpage/web.py and changing the mysql db credentials for your DB.
+3. Set up DB connection in /AR/components/db.php and changing the mysql db credentials for your DB.
+4. run '$python web.py' in /webpage/ directory to go to signup page
+5. Set up apacheserver and put project folder in /Library/WebServer/Documents/ (apache server folder).
+5. Go to localhost/280FlashProject_AR/AR/ to run the webcam page for Badge recognition.
+
+
+Steps to test it:
+1. Go to the Signup page hosted by '$python web.py'
+2. Enter Sign-up information, take a picture of the marker with your phone. Hit SignUp button
+3. Go to badge recognition page at localhost/280FlashProject_AR/AR/ from apache server and show your
+    marker on the camera and your info should display in 3D image.
